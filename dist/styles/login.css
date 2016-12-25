@@ -1,0 +1,86 @@
+.header-page-title {
+	color: #fff;
+	line-height: 3em;
+	text-align: center;
+	font-weight: 700;
+	font-size: 1em;
+}
+
+/*container for forms*/
+.login-form-container {
+	overflow: auto;
+	position: relative;
+	width: 90%;
+	max-width: 25em;
+	height: 20em;
+	margin: 0 auto 2em auto;
+}
+
+/*containers for white background login fields*/
+.login-fields-container {
+	position: relative;
+	width: 100%;
+	height: 7em;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 2px -2px #bcbabe
+}
+
+.recovery-fields-container {
+	position: relative;
+	height: 3.5em;
+	overflow: auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 2px -2px #bcbabe
+}
+
+.login-input {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	width: 98%;
+	margin: 0.5em 0 0.5em 1%;
+	line-height: 1.5em;
+	border-bottom: 1px solid #bcbabe ;
+	text-align: left;
+	font-size: 1.2em;
+
+}
+
+.login-input:focus {
+	border-bottom: 3px solid #bcbabe;
+	text-align: left;
+	font-size: 1.2em;
+
+}
+
+.view-nav-link {
+	text-align: center;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	font-size: 1.3em;
+	color: black;
+}
+
+.view-nav-link:hover {
+	cursor: pointer;
+	color: grey;
+}
+
+
+.login-button {
+	width: 98%;
+	height: 2.5em;
+	margin-left: 1%;
+	color: white;
+	border-style: hidden;
+	cursor: pointer;
+	background-color: #1995ad;
+	box-shadow: 0 4px 2px -2px #bcbabe;
+	font-size: 1.2em;
+}
+
+.login-button:hover {
+	color: #bcbabe;
+}
