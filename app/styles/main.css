@@ -44,3 +44,27 @@ body {
   width: 100%
 
 }
+
+/*spinner css*/
+.spinner-container {
+	position: absolute;
+	width: 100%;
+	top: 3em;
+	height: calc(100% - 3em);
+	background-color: #fff;
+}
+
+.spinner {
+		border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #16aacb; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+		margin: 4em auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

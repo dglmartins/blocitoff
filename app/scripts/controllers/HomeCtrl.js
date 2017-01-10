@@ -4,12 +4,12 @@
 
   function HomeCtrl(currentAuth, $firebaseAuth, $state) {
 
-    var self = this;
-    self.currentAuth = currentAuth;
+    const home = this;
+    home.currentAuth = currentAuth;
 
     //function for user to signOut. Calls angularfire $signOut on $firebaseAuth() via our AuthFactory (this.auth).
     //signs out
-    self.signOut = function() {
+    home.signOut = function() {
       $firebaseAuth().$signOut();
       $state.go('login');
     };

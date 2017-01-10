@@ -6,29 +6,32 @@
 
 <section class="login-form-container">
 		<!-- the form below is for signing in. It is viewable when the view is resolved (else a spinner renders) and when the user is not resetting password-->
-		<form name="signin" ng-show="!auth.resettingPassword">
+		<form name="signin" ng-show="!auth.state.resettingPassword">
 			<div class="login-fields-container">
-				<input name="email" class="login-input" type="text" placeholder="e-mail" ng-model="auth.email" ng-required="true" onfocus="this.placeholder = ''" onblur="this.placeholder = 'e-mail'"><br>
-				<input name="password" class="login-input" type="password" placeholder="password" ng-model="auth.password" ng-required="true" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'"><br>
+				<input class="login-input" type="text" placeholder="e-mail" ng-model="auth.state.boundInputs.email" ng-required="true" onfocus="this.placeholder = ''" onblur="this.placeholder = 'e-mail'"><br>
+				<input class="login-input" type="password" placeholder="password" ng-model="auth.state.boundInputs.password" ng-required="true"><br>
 			</div>
-			<div class="view-nav-link" ng-click="auth.resettingPassword = true">
+			<div class="view-nav-link" ng-click="auth.viewFunctions.toggleResetPassword(true)">
 				Forgot Password?
 			</div>
-			<button class="login-button" ng-click="signin.$valid && auth.signIn()">Sign in</button>
+			<button class="login-button" ng-click="signin.$valid && auth.viewFunctions.signIn()">Sign in</button>
 			<br>
 			<br>
-			<button class="login-button" ng-click="signin.$valid && auth.createUser()">Create Account</button>
+			<button class="login-button" ng-click="signin.$valid && auth.viewFunctions.createUser()">Create Account</button>
 
 		</form>
 		<!-- the form below is for resetting password. It is viewable when the view is resolved (else a spinner renders) and when the user is resetting password-->
-		<form name="reset" ng-show="auth.resettingPassword">
+		<form name="reset" ng-show="auth.state.resettingPassword">
 			<div class="recovery-fields-container">
-				<input name="email" class="login-input" type="text" placeholder="e-mail" ng-model="auth.email" ng-required="true"><br>
+				<input name="email" class="login-input" type="text" placeholder="e-mail" ng-model="auth.state.boundInputs.email" ng-required="true"><br>
 				<!--this form (with name reset) needs to be valid for ng-click to call auth.resetPassword()-->
 			</div>
-			<div class="view-nav-link" ng-click="auth.resettingPassword = false">
+			<div class="view-nav-link" ng-click="auth.viewFunctions.toggleResetPassword(false)">
 				Back to sign in
 			</div>
-			<button class="login-button" ng-click="reset.$valid && auth.resetPassword()">Reset Password</button>
+			<button class="login-button" ng-click="reset.$valid && auth.viewFunctions.resetPassword()">Reset Password</button>
 		</form>
 </section>
+<div class="spinner-container" ng-show="auth.state.viewingSpinner">
+	<div class="spinner"></div>
+</div>

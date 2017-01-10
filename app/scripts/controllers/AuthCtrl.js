@@ -1,27 +1,34 @@
 (function() {
 
-  function AuthCtrl(AuthFactory) {
-    //to avoid "this" confusion!
-    var self = this;
+  function AuthCtrl(AuthFactory, $firebaseAuth) {
 
-    //funtion resetPassword calls firebase's $sendPasswordResetEmail on $firebaseAuth() (via our Authfactory) See factory.
-    self.resetPassword = function() {
-      AuthFactory.resetPassword(self);
-    };
+    const auth = this;
 
-    //sign in with email and password angularfire. See factory.
-    self.signIn = function() {
-      AuthFactory.signIn(self);
-    };
+    auth.state = AuthFactory.intializeState();
 
-    //create user with email and password angularfire. See factory.
-    self.createUser = function() {
-      AuthFactory.createUser(self);
+    auth.viewFunctions = {
+
+      toggleResetPassword(bool) {
+        AuthFactory.toggleResetPassword(auth, bool);
+      },
+      resetPassword() {
+        AuthFactory.resetPassword(auth, $firebaseAuth);
+      },
+      signIn() {
+        AuthFactory.signIn(auth, $firebaseAuth);
+      },
+      createUser() {
+        AuthFactory.createUser(auth, $firebaseAuth)
+      },
+      log(log) {
+        console.log(log);
+      }
     };
+    console.log(auth);
   }
 
   angular
     .module('blocitoff')
-    .controller('AuthCtrl',['AuthFactory', AuthCtrl]);
+    .controller('AuthCtrl',['AuthFactory', '$firebaseAuth', AuthCtrl]);
 
 })();

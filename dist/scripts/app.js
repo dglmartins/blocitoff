@@ -25,11 +25,11 @@
 				// Although a $requireSignIn firebase function exists I used my own
 				// resolve promise to practive resolves and promises.
         // Auth refers to our $firebaseAuth wrapper in the factory below
-        "currentAuth": ["AuthFactory", function(AuthFactory) {
+        "currentAuth": ["requireAuthService", "$firebaseAuth", function(requireAuthService, $firebaseAuth) {
           // requireAuth returns a promise so the resolve waits for it to complete
           // If the promise is rejected, it will throw a $stateChangeError "AUTH_REQUIRED"
 					// the error will be caught and the user redirected to login.
-          return AuthFactory.requireAuth();
+          return requireAuthService.requireAuth($firebaseAuth);
         }]
       }
 
