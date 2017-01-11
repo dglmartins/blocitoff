@@ -1,6 +1,6 @@
 //creates a re-usable factory of stateless firebase functions
 (function() {
-  function firebaseFunctions() {
+  function firebaseFunctions($firebaseArray) {
     //auth functions
     firebaseFunctions.signIn = function(inputs, firebaseAuth) {
         return firebaseAuth().$signInWithEmailAndPassword(inputs.email.toLowerCase(), inputs.password).then(function(firebaseUser) {
@@ -31,11 +31,23 @@
       });
     }
 
+    firebaseFunctions.signOut = function(firebaseAuth) {
+      return firebaseAuth().$signOut();
+    };
+
+    firebaseFunctions.getFirebaseArray = function(ref) {
+      const records = $firebaseArray(ref);
+      return records.$loaded(function() {
+        return records;
+      });
+
+    };
+
     return firebaseFunctions;
   }
 
   angular
     .module('blocitoff')
-    .factory('firebaseFunctions', [firebaseFunctions]);
+    .factory('firebaseFunctions', ['$firebaseArray', firebaseFunctions]);
 
 })();

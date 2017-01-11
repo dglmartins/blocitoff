@@ -1,0 +1,74 @@
+/*overall home container*/
+.home-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*current user and sign out*/
+.current-user-container{
+  width: 100%;
+  float: left;
+  overflow: auto;
+
+}
+
+.current-user-info {
+  height: 3em;
+  line-height: 3em;
+  float: right;
+  color:#fff;
+  margin-right: 1em;
+}
+
+.current-user-info:hover {
+  color:#c0c0c0;
+  cursor: pointer;
+}
+
+/*table for viewing admin data*/
+.data-view-table-container {
+  width: 95%;
+  overflow: auto;
+  margin-left: 2.5%;
+  margin-top: 0.5em;
+  padding: 0;
+}
+
+.data-view-table {
+  width: 100%;
+
+}
+
+/*table header*/
+.data-view-table-header th{
+  background-color: #c0c0c0;
+  padding: 0.5em;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 2em;
+}
+
+
+/*table data rows*/
+.data-item {
+  text-align: left;
+  line-height: 4em;
+  cursor: pointer;
+  width: 100%;
+}
+
+/*table cells*/
+.data-item td {
+  padding-left: 1em;
+  color: #fff;
+  background-color: #ea7a87;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+
+.record-three-quarters-view {
+  width: 75%;
+}

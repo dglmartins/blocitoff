@@ -1,2 +1,31 @@
-<h1>Logged in as {{home.currentAuth.email}}</h1>
-<button class="login-button" ng-click="home.signOut()">Sign out</button>
+<section class="home-container">
+  <header class="main-header">
+    <div class="current-user-container">
+      <div class="current-user-info" ng-click="home.viewFunctions.signOut()" ng-show="!onTopMenu" >
+        <p>{{home.state.currentAuth.email}}</p>
+      </div>
+    </div>
+  </header>
+  <section class="data-view-table-container">
+    <table class="data-view-table">
+      <thead class="data-view-table-header">
+        <th colspan="2">
+          Active Tasks
+        </th>
+      </thead>
+      <tbody>
+        <tr class="data-item" ng-repeat="task in home.state.activeTasks">
+          <td class="record-three-quarters-view">
+            {{task.description}}
+          </td>
+          <td>
+            {{task.status}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+<div class="spinner-container" ng-show="home.state.viewingSpinner">
+	<div class="spinner"></div>
+</div>

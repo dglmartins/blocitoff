@@ -2,22 +2,26 @@
 //only signed in users access home via resolve.
 (function() {
 
-  function HomeCtrl(currentAuth, $firebaseAuth, $state) {
+  function homeCtrl(currentAuth, homeFactory, $firebaseAuth) {
 
     const home = this;
-    home.currentAuth = currentAuth;
+    homeFactory.intializeState(home, currentAuth);
 
-    //function for user to signOut. Calls angularfire $signOut on $firebaseAuth() via our AuthFactory (this.auth).
-    //signs out
-    home.signOut = function() {
-      $firebaseAuth().$signOut();
-      $state.go('login');
+    home.viewFunctions = {
+      signOut() {
+        homeFactory.signOut($firebaseAuth);
+      },
+      log(log) {
+        console.log(log);
+      }
     };
+
+    console.log(home);
 
   }
 
   angular
     .module('blocitoff')
-    .controller('HomeCtrl',['currentAuth', '$firebaseAuth', '$state', HomeCtrl]);
+    .controller('homeCtrl',['currentAuth', 'homeFactory','$firebaseAuth', homeCtrl]);
 
 })();

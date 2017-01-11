@@ -1,7 +1,7 @@
 (function() {
-  function AuthFactory($state, stateUpdate, firebaseFunctions) {
+  function authFactory($state, stateUpdate, firebaseFunctions) {
     //initializes state;
-    AuthFactory.intializeState = function() {
+    authFactory.intializeState = function() {
       return { resettingPassword: false, viewingSpinner: false, boundInputs: { email: '', password: '' }};
     };
 
@@ -39,11 +39,11 @@
 
     //functions accessed from view through controller
 
-    AuthFactory.toggleResetPassword = function(auth, bool) {
+    authFactory.toggleResetPassword = function(auth, bool) {
       stateUpdate(auth, actions.toggleResetPassword(bool), authStateReducer);
     };
 
-    AuthFactory.signIn = function(auth, firebaseAuth) {
+    authFactory.signIn = function(auth, firebaseAuth) {
       stateUpdate(auth, actions.startSpinner(), authStateReducer);
       firebaseFunctions.signIn(auth.state.boundInputs, firebaseAuth).then(function() {
         stateUpdate(auth, actions.stopSpinner(), authStateReducer);
@@ -52,14 +52,14 @@
       });
     };
 
-    AuthFactory.resetPassword = function(auth, firebaseAuth) {
+    authFactory.resetPassword = function(auth, firebaseAuth) {
       stateUpdate(auth, actions.startSpinner(), authStateReducer);
       firebaseFunctions.resetPassword(auth.state.boundInputs, firebaseAuth).then(function() {
         stateUpdate(auth, actions.stopSpinner(), authStateReducer);
       });
     };
 
-    AuthFactory.createUser = function(auth, firebaseAuth) {
+    authFactory.createUser = function(auth, firebaseAuth) {
       // Create a new user
       stateUpdate(auth, actions.startSpinner(), authStateReducer);
       firebaseFunctions.createUser(auth.state.boundInputs, firebaseAuth).then(function() {
@@ -68,11 +68,11 @@
       });
     };
 
-    return AuthFactory;
+    return authFactory;
   }
 
   angular
     .module('blocitoff')
-    .factory('AuthFactory', ['$state', 'stateUpdate', 'firebaseFunctions', AuthFactory]);
+    .factory('authFactory', ['$state', 'stateUpdate', 'firebaseFunctions', authFactory]);
 
 })();

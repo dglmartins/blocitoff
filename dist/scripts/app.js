@@ -9,16 +9,16 @@
 		});
 
 		$stateProvider
-			// login state with AuthCtrl as auth controller
+			// login state with authCtrl as auth controller
 			.state('login', {
 				url: '/login',
-				controller: 'AuthCtrl as auth',
+				controller: 'authCtrl as auth',
 				templateUrl: 'templates/login.html'
 		})
 			// home state requires sign in via resolve.
 			.state('home', {
 				url: '/home',
-				controller: 'HomeCtrl as home',
+				controller: 'homeCtrl as home',
 				templateUrl: 'templates/home.html',
         resolve: {
         // controller will not be loaded until requireAuth resolves
