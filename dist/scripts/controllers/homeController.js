@@ -2,14 +2,17 @@
 //only signed in users access home via resolve.
 (function() {
 
-  function homeCtrl(currentAuth, homeFactory, $firebaseAuth) {
+  function homeCtrl(currentAuth, homeService, $firebaseAuth) {
 
     const home = this;
-    homeFactory.intializeState(home, currentAuth);
+    homeService.intializeState(home, currentAuth);
 
     home.viewFunctions = {
       signOut() {
-        homeFactory.signOut($firebaseAuth);
+        homeService.signOut($firebaseAuth);
+      },
+      toggleTasksView(bool) {
+        homeService.toggleTasksView(home, bool);
       },
       log(log) {
         console.log(log);
@@ -22,6 +25,6 @@
 
   angular
     .module('blocitoff')
-    .controller('homeCtrl',['currentAuth', 'homeFactory','$firebaseAuth', homeCtrl]);
+    .controller('homeCtrl',['currentAuth', 'homeService','$firebaseAuth', homeCtrl]);
 
 })();

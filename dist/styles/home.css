@@ -33,13 +33,12 @@
   width: 95%;
   overflow: auto;
   margin-left: 2.5%;
-  margin-top: 0.5em;
+  margin-top: 0em;
   padding: 0;
 }
 
 .data-view-table {
   width: 100%;
-
 }
 
 /*table header*/
@@ -71,4 +70,15 @@
 
 .record-three-quarters-view {
   width: 75%;
+}
+
+.task-view-nav-link {
+  display: inline;
+  float: right;
+  margin: 2em 1em 0.5em 2em;
+}
+
+.task-view-nav-link:hover {
+  cursor: pointer;
+  color: grey;
 }

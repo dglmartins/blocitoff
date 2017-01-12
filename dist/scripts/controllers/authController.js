@@ -1,24 +1,24 @@
 (function() {
 
-  function authCtrl(authFactory, $firebaseAuth) {
+  function authCtrl(authService, $firebaseAuth) {
 
     const auth = this;
 
-    auth.state = authFactory.intializeState();
+    auth.state = authService.intializeState();
 
     auth.viewFunctions = {
 
       toggleResetPassword(bool) {
-        authFactory.toggleResetPassword(auth, bool);
+        authService.toggleResetPassword(auth, bool);
       },
       resetPassword() {
-        authFactory.resetPassword(auth, $firebaseAuth);
+        authService.resetPassword(auth, $firebaseAuth);
       },
       signIn() {
-        authFactory.signIn(auth, $firebaseAuth);
+        authService.signIn(auth, $firebaseAuth);
       },
       createUser() {
-        authFactory.createUser(auth, $firebaseAuth)
+        authService.createUser(auth, $firebaseAuth)
       },
       log(log) {
         console.log(log);
@@ -29,6 +29,6 @@
 
   angular
     .module('blocitoff')
-    .controller('authCtrl',['authFactory', '$firebaseAuth', authCtrl]);
+    .controller('authCtrl',['authService', '$firebaseAuth', authCtrl]);
 
 })();

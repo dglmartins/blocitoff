@@ -7,7 +7,9 @@
     </div>
   </header>
   <section class="data-view-table-container">
-    <table class="data-view-table">
+    <p class="task-view-nav-link" ng-click="home.viewFunctions.toggleTasksView(false)">Inactive</p>
+    <p class="task-view-nav-link" ng-click="home.viewFunctions.toggleTasksView(true)">Active</p>
+    <table class="data-view-table" ng-show="home.state.viewActiveTasks">
       <thead class="data-view-table-header">
         <th colspan="2">
           Active Tasks
@@ -15,6 +17,23 @@
       </thead>
       <tbody>
         <tr class="data-item" ng-repeat="task in home.state.activeTasks">
+          <td class="record-three-quarters-view">
+            {{task.description}}
+          </td>
+          <td>
+            {{task.status}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="data-view-table" ng-show="!home.state.viewActiveTasks">
+      <thead class="data-view-table-header">
+        <th colspan="2">
+          Inactive Tasks
+        </th>
+      </thead>
+      <tbody>
+        <tr class="data-item" ng-repeat="task in home.state.inactiveTasks">
           <td class="record-three-quarters-view">
             {{task.description}}
           </td>
