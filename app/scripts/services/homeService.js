@@ -1,5 +1,5 @@
 (function() {
-  function homeService($state, stateUpdate, firebaseFunctions) {
+  function homeService($state, stateUpdate, $timeout, firebaseFunctions) {
     //initializes state;
     homeService.intializeState = function(home, currentAuth) {
       home.state = {currentAuth: currentAuth, viewingSpinner: true, viewActiveTasks: true} //initial state
@@ -7,10 +7,14 @@
 
         stateUpdate(home, actions.addFirebaseArray(results), homeStateReducer); //adds firebase array to state
         stateUpdate(home, actions.updateTasks(results), homeStateReducer); // adds active/inative tasks to state
+
+        stateUpdate(home, actions.applyBackgrounds(home.state.activeTasks), homeStateReducer); //adds backgrounds color order to state
+
         stateUpdate(home, actions.stopSpinner(), homeStateReducer); // stops spinner in state
 
         home.state.firebaseArray.$watch(function(event) { //watches firebase array, if changes, redoes active/inative split
           stateUpdate(home, actions.updateTasks(home.state.firebaseArray), homeStateReducer);
+          stateUpdate(home, actions.applyBackgrounds(home.state.activeTasks), homeStateReducer);
         });
 
       });
@@ -27,6 +31,8 @@
         case 'UPDATE_TASKS':
         case 'ADD_FIREBASE_ARRAY':
         case 'TOGGLE_TASK_VIEW':
+        case 'RESET_INPUTS':
+        case 'APPLY_BACKGROUNDS':
           return R.merge(state, action.payload);
         default:
           return state;
@@ -49,6 +55,12 @@
       },
       toggleTasksView(bool) {
         return { type: 'TOGGLE_TASK_VIEW', payload: {viewActiveTasks: bool}};
+      },
+      resetInputs() {
+        return { type: 'RESET_INPUTS', payload: { boundInputs: { newTaskDescription: '', newTaskPriority: ''}}};
+      },
+      applyBackgrounds(activeTasks) {
+        return { type: 'APPLY_BACKGROUNDS', payload: applyBackgrounds(activeTasks)};
       }
     };
 
@@ -56,6 +68,19 @@
     //functions accessed from view through controller
     homeService.toggleTasksView = function(home, bool) {
       stateUpdate(home, actions.toggleTasksView(bool), homeStateReducer);
+    };
+
+    homeService.saveTask = function(home) {
+      const data = {
+        createdAtMilliseconds: new Date().getTime(),
+        description: home.state.boundInputs.newTaskDescription,
+        priority: home.state.boundInputs.newTaskPriority,
+        status: 'incomplete'
+      };
+      firebaseFunctions.addRecord(home.state.firebaseArray, data).then(function(){
+        console.log('im here once');
+        stateUpdate(home, actions.resetInputs(), homeStateReducer);
+      });
     };
 
     homeService.signOut = function(firebaseAuth) {
@@ -84,9 +109,35 @@
       const expiredOrComplete = (task) => R.or(R.lt(R.prop("createdAtMilliseconds", task), expiryDateMilliseconds), R.propEq('status', 'complete')(task));
 
       //these return new filtered arrays
-      const activeTasks = R.filter(notExpiredAndIncomplete, firebaseArray);
-      const inactiveTasks = R.filter(expiredOrComplete, firebaseArray);;
+      const priorityThenTimeSort = R.sortWith([R.ascend(R.prop('priority')), R.descend(R.prop('createdAtMilliseconds'))]);
+      const activeTasks = priorityThenTimeSort(R.filter(notExpiredAndIncomplete, firebaseArray));
+      const inactiveTasks = priorityThenTimeSort(R.filter(expiredOrComplete, firebaseArray));
+      //applies backgrounds
+
       return {activeTasks: activeTasks, inactiveTasks: inactiveTasks};
+    };
+
+    const applyBackgrounds = function(activeTasks) {
+      const assignColor = (task) => {
+        switch (task.priority) {
+          case "1":
+            return '#ea7a87';
+            break;
+          case "2":
+            return '#ffbb00';
+            break;
+          case "3":
+            return '#86ac41';
+            break;
+        }
+      };
+      const bgColorsArray = R.map(assignColor, activeTasks);
+      const mapIndexed = R.addIndex(R.map);
+      $timeout(function() {
+        const tasks = document.getElementsByClassName('active-task-description');
+        const test = mapIndexed((val, idx) => val.style.backgroundColor = bgColorsArray[idx], tasks);
+      });
+      return {bgColors: bgColorsArray}
     };
 
     return homeService;
@@ -94,6 +145,6 @@
 
   angular
     .module('blocitoff')
-    .factory('homeService', ['$state','stateUpdate', 'firebaseFunctions', homeService]);
+    .factory('homeService', ['$state','stateUpdate', '$timeout',  'firebaseFunctions', homeService]);
 
 })();

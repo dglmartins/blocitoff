@@ -14,6 +14,9 @@
       toggleTasksView(bool) {
         homeService.toggleTasksView(home, bool);
       },
+      saveTask() {
+        homeService.saveTask(home);
+      },
       log(log) {
         console.log(log);
       }

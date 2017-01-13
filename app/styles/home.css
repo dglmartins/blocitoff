@@ -48,6 +48,7 @@
   font-weight: 700;
   cursor: pointer;
   line-height: 2em;
+  text-align: left;
 }
 
 
@@ -60,16 +61,45 @@
 }
 
 /*table cells*/
-.data-item td {
+.active-task-description {
   padding-left: 1em;
   color: #fff;
   background-color: #ea7a87;
   border-bottom: 1px solid #c0c0c0;
 }
 
+.task-save-button {
+  width: 98%;
+	height: 2.5em;
+	margin-left: 1%;
+	color: white;
+	border-style: hidden;
+	cursor: pointer;
+	background-color: #1995ad;
+	box-shadow: 0 4px 2px -2px #bcbabe;
+	font-size: 1.2em;
+  text-align: center;
+}
 
-.record-three-quarters-view {
-  width: 75%;
+.task-complete-button {
+  text-align: center;
+  /*color: #fff;*/
+  background: url(../assets/images/ic_check.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  /*background-position: 95% 50%;*/
+  background-color: #fff;
+  border-bottom: 1px solid #c0c0c0;
+  cursor: pointer;
+}
+
+
+.record-two-thirds-view {
+  width: 66.6666%;
+}
+
+.record-one-fifth-view {
+  width: 20%;
 }
 
 .task-view-nav-link {
@@ -81,4 +111,62 @@
 .task-view-nav-link:hover {
   cursor: pointer;
   color: grey;
+}
+
+.new-task-header {
+  text-align: left;
+  background-color: #1995ad;
+  padding-left: 1em;
+  color: #fff;
+}
+
+.select-dropdown-input {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	width: 98%;
+	margin: 0.5em 0 0.5em 1%;
+	line-height: 1.5em;
+	border-bottom: 1px solid #c0c0c0 ;
+	text-align: left;
+	font-size: 1.2em;
+	-webkit-appearance:none;
+  -moz-appearance: none;
+   appearance: none;
+  background: url(../assets/images/ic_menu_downarrow.png) no-repeat;
+  background-position: 95% 50%;
+  background-size: 1.2em 1.2em;
+}
+
+@media (max-width: 500px) {
+  .task-view-nav-link {
+    font-size: 0.6em;
+  }
+
+  label {
+    font-size: 0.6em;
+  }
+
+  .login-input {
+    font-size: 0.6em;
+  }
+
+  .select-dropdown-input {
+    font-size: 0.6em;
+  }
+
+  .task-save-button {
+    font-size: 0.6em;
+  }
+
+  .data-item td{
+    font-size: 0.6em;
+  }
+
+}
+
+@media (max-width: 300px) {
+  .current-user-info {
+    font-size: 0.6em;
+  }
 }

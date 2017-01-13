@@ -1,8 +1,9 @@
 <section class="home-container">
   <header class="main-header">
     <div class="current-user-container">
+
       <div class="current-user-info" ng-click="home.viewFunctions.signOut()" ng-show="!onTopMenu" >
-        <p>{{home.state.currentAuth.email}}</p>
+        <p>Blocitoff - {{home.state.currentAuth.email}}</p>
       </div>
     </div>
   </header>
@@ -11,17 +12,32 @@
     <p class="task-view-nav-link" ng-click="home.viewFunctions.toggleTasksView(true)">Active</p>
     <table class="data-view-table" ng-show="home.state.viewActiveTasks">
       <thead class="data-view-table-header">
-        <th colspan="2">
+        <th colspan="3">
           Active Tasks
         </th>
       </thead>
       <tbody>
+        <tr>
+          <td class="record-two-thirds-view">
+            <label for="task">Enter new task</label>
+            <input name="task" class="login-input" type="text" placeholder="Description" ng-model="home.state.boundInputs.newTaskDescription" ng-required="true" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"></td>
+          <td class="record-one-fifth-view">
+            <label for="priority">Priority</label>
+            <select name="priority" class="select-dropdown-input" ng-model="home.state.boundInputs.newTaskPriority">
+              <option value="1">High</option>
+              <option value="2">Medium</option>
+              <option value="3">Low</option>
+            </select>
+          </td>
+          <td class="task-save-button" ng-click="home.viewFunctions.saveTask()">
+            Save
+          </td>
+        </tr>
         <tr class="data-item" ng-repeat="task in home.state.activeTasks">
-          <td class="record-three-quarters-view">
+          <td class="active-task-description" colspan="2">
             {{task.description}}
           </td>
-          <td>
-            {{task.status}}
+          <td class="task-complete-button" ng-click="home.viewFunctions.markComplete(task)">
           </td>
         </tr>
       </tbody>

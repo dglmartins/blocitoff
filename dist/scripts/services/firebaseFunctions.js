@@ -43,6 +43,15 @@
 
     };
 
+    firebaseFunctions.addRecord = function(firebaseArray, data) {
+      return firebaseArray.$add(data).then(function(results) {
+        return results;
+      }).catch(function(error){
+        alert(error);
+        return error;
+      });
+    };
+
     return firebaseFunctions;
   }
 
