@@ -1,7 +1,5 @@
-//creates a re-usable factory of stateless firebase functions
 (function() {
   function stateUpdate() {
-    //auth functions
 
     return function(controller, action, stateReducer) {
       const prevState = controller.state;
