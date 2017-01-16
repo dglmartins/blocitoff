@@ -146,6 +146,26 @@
   background-position: 95% 50%;
   background-size: 1.2em 1.2em;
 }
+.task-input {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	width: 98%;
+	margin: 0.5em 0 0.5em 1%;
+	line-height: 1.5em;
+	border-bottom: 1px solid #bcbabe ;
+	text-align: left;
+	font-size: 1.2em;
+
+}
+
+.task-input:focus {
+	border-bottom: 3px solid #bcbabe;
+	text-align: left;
+	font-size: 1.2em;
+
+}
+
 
 @media (max-width: 500px) {
   .task-view-nav-link {
@@ -156,7 +176,7 @@
     font-size: 0.6em;
   }
 
-  .login-input {
+  .task-input {
     font-size: 0.6em;
   }
 
