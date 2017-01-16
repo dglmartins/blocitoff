@@ -70,6 +70,12 @@
       stateUpdate(home, actions.toggleTasksView(bool), homeStateReducer);
     };
 
+    homeService.markComplete = function (home, task) {
+      const record = home.state.firebaseArray.$getRecord(task.$id);
+      record.status = "complete";
+      home.state.firebaseArray.$save(record);
+    };
+
     homeService.saveTask = function(home) {
       const data = {
         createdAtMilliseconds: new Date().getTime(),

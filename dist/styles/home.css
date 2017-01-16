@@ -68,6 +68,15 @@
   border-bottom: 1px solid #c0c0c0;
 }
 
+/*table cells*/
+.completed-task-description {
+  padding-left: 1em;
+  color: #fff;
+  background-color: #86ac41;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+
 .task-save-button {
   width: 98%;
 	height: 2.5em;

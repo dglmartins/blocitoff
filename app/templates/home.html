@@ -44,17 +44,14 @@
     </table>
     <table class="data-view-table" ng-show="!home.state.viewActiveTasks">
       <thead class="data-view-table-header">
-        <th colspan="2">
+        <th>
           Inactive Tasks
         </th>
       </thead>
       <tbody>
         <tr class="data-item" ng-repeat="task in home.state.inactiveTasks">
-          <td class="record-three-quarters-view">
+          <td class="completed-task-description">
             {{task.description}}
-          </td>
-          <td>
-            {{task.status}}
           </td>
         </tr>
       </tbody>

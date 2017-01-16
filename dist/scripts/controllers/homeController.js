@@ -17,6 +17,9 @@
       saveTask() {
         homeService.saveTask(home);
       },
+      markComplete(task) {
+        homeService.markComplete(home, task);
+      },
       log(log) {
         console.log(log);
       }
